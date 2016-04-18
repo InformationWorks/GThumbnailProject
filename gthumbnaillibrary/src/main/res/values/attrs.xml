@@ -2,10 +2,7 @@
 <resources>
     <declare-styleable name="GThumb">
         <attr name="textSize" format="dimension"/>
-        <attr name="displayMode" format="enum">
-            <enum name="SingleAlphabet" value="1"/>
-            <enum name="DoubleAlphabet" value="2"/>
-        </attr>
+        <attr name="previewText" format="string"/>
         <attr name="monoBGColor" format="color"/>
         <attr name="monoTextColor" format="color"/>
     </declare-styleable>
