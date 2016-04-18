@@ -8,11 +8,10 @@
         android:layout_height="match_parent"
         android:id="@+id/relative_background">
         <ImageView
-            android:id="@+id/imageView_circle"
+            android:id="@+id/imageView_color_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/oval_white"
-            android:tint="@color/google_deepPurple_500"/>
+            android:src="@drawable/oval_white"/>
         <TextView
             android:id="@+id/textView_initials"
             android:layout_width="match_parent"
@@ -28,7 +27,7 @@
         android:layout_height="match_parent"
         android:id="@+id/relative_foreground">
         <ImageView
-            android:id="@+id/imageView_user"
+            android:id="@+id/imageView_real"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
