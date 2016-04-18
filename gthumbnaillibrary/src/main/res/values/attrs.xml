@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GThumb">
+        <attr name="textSize" format="dimension"/>
+        <attr name="displayMode" format="enum">
+            <enum name="SingleAlphabet" value="1"/>
+            <enum name="DoubleAlphabet" value="2"/>
+        </attr>
+        <attr name="monoBGColor" format="color"/>
+        <attr name="monoTextColor" format="color"/>
+    </declare-styleable>
+</resources>
