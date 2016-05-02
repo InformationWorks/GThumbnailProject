@@ -1,0 +1,288 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hbb20.gthumbnailproject.ConfigFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/relative_demo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.hbb20.GThumb
+                android:id="@+id/demo1"
+                android:layout_width="@dimen/gThumbDemo"
+                android:layout_height="@dimen/gThumbDemo" />
+
+            <com.hbb20.GThumb
+                android:id="@+id/demo2"
+                android:layout_width="@dimen/gThumbDemo"
+                android:layout_height="@dimen/gThumbDemo" />
+
+            <com.hbb20.GThumb
+                android:id="@+id/demo3"
+                android:layout_width="@dimen/gThumbDemo"
+                android:layout_height="@dimen/gThumbDemo" />
+
+            <com.hbb20.GThumb
+                android:id="@+id/demo4"
+                android:layout_width="@dimen/gThumbDemo"
+                android:layout_height="@dimen/gThumbDemo" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bold text" />
+
+                    <CheckBox
+                        android:id="@+id/checkbox_useBold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="Use bold text" />
+                </LinearLayout>
+
+                <!--background shape-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shape" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupShape"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radio_round"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Round" />
+
+                        <RadioButton
+                            android:id="@+id/radio_square"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Square" />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <!--click listener-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Click listener on thumb" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupClick"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radio_click_set"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Yes, set onClickListener (Tap thumb to check)" />
+
+                        <RadioButton
+                            android:id="@+id/radio_click_avoid"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No, don't set clickListener " />
+                    </RadioGroup>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/section"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Background color" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupColor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/radio_color_multi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="Use multicolor backgrounds" />
+
+                        <RadioButton
+                            android:id="@+id/radio_color_mono"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Use mono color background" />
+                    </RadioGroup>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="16dp">
+
+                        <LinearLayout
+                            android:id="@+id/linear_monoColor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:padding="8dp">
+
+                            <RelativeLayout
+                                android:layout_width="50dp"
+                                android:layout_height="fill_parent"
+                                android:background="@android:color/darker_gray"
+                                android:padding="2dp">
+
+                                <View
+                                    android:id="@+id/viewSampleColor"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="fill_parent"
+                                    android:background="#5500ff" />
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linear_seekHolder"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/label"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="R"
+                                        android:textColor="@color/red" />
+
+                                    <SeekBar
+                                        android:id="@+id/seekbar_red"
+                                        style="@style/seekbar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:max="255"
+                                        android:progressTint="@color/red"
+                                        android:thumbTint="@color/red" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/label"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="G"
+                                        android:textColor="@color/green" />
+
+                                    <SeekBar
+                                        android:id="@+id/seekbar_green"
+                                        style="@style/seekbar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:backgroundTint="@color/green"
+                                        android:max="255"
+                                        android:progressTint="@color/green"
+                                        android:thumbTint="@color/green" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        style="@style/label"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="B"
+                                        android:textColor="@color/blue" />
+
+                                    <SeekBar
+                                        android:id="@+id/seekbar_blue"
+                                        style="@style/seekbar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:max="255"
+                                        android:progressTint="@color/blue"
+                                        android:thumbTint="@color/blue" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/overlay"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_alignBottom="@+id/linear_monoColor"
+                            android:layout_alignTop="@+id/linear_monoColor"
+                            android:background="@color/overlay" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</FrameLayout>

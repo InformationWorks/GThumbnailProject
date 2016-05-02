@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/relative_user_pic_holder"
+    android:id="@+id/relative_holder"
+    android:layout_width="70dp"
+    android:layout_height="70dp"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:orientation="vertical"
     android:padding="8dp">
     <RelativeLayout
+        android:id="@+id/relative_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/relative_background">
+        android:gravity="center">
         <ImageView
             android:id="@+id/imageView_color_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/oval_white"/>
+            android:layout_centerInParent="true"
+            android:src="@drawable/oval_white"
+            android:tint="@color/google_deepPurple_500" />
         <TextView
             android:id="@+id/textView_initials"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-light"
             android:gravity="center"
             android:text="HB"
-            android:textSize="23sp"
             android:textColor="@color/g_white"
-            android:fontFamily="sans-serif-light"/>
+            android:textSize="22sp" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/relative_foreground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/relative_foreground">
+        android:layout_height="match_parent">
         <ImageView
             android:id="@+id/imageView_real"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
             />
-
     </RelativeLayout>
 </RelativeLayout>

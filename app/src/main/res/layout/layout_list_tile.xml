@@ -3,20 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:background="#ededed"
+    android:orientation="vertical">
 
-    <com.hbb20.gthumbnaillibrary.GThumb
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        app:monoBGColor="#410d0d"
-        app:monoTextColor="#e3e3e3"
-        app:previewText=""
-        />
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Harsh Bhakta"
-        android:textSize="22sp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.hbb20.GThumb
+            android:id="@+id/gThumb"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            app:backgroundShape="round"
+            app:previewText="HB"
+            app:textSize="22sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Harsh Bhakta"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/textView_country"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="India"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginLeft="110dp"
+        android:background="#e5e5e5" />
 </LinearLayout>

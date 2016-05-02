@@ -5,5 +5,10 @@
         <attr name="previewText" format="string"/>
         <attr name="monoBGColor" format="color"/>
         <attr name="monoTextColor" format="color"/>
+        <attr name="backgroundShape" format="enum">
+            <enum name="round" value="0" />
+            <enum name="square" value="1" />
+        </attr>
+        <attr name="boldText" format="boolean" />
     </declare-styleable>
 </resources>
