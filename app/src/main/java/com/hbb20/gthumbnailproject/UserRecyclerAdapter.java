@@ -23,7 +23,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
     List<CaptainPlayer> captainPlayerList;
     Context context;
     private boolean useBold = false;
-    private String backgroundOption = "0";
+    private GThumb.BACKGROUND_SHAPE backgroundOption = GThumb.BACKGROUND_SHAPE.ROUND;
     private boolean needToSetClickListener = true;
     private int customMonoColor;
     private boolean useMonoColor;
@@ -52,11 +52,11 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
         this.useBold = useBold;
     }
 
-    public String getBackgroundOption() {
+    public GThumb.BACKGROUND_SHAPE getBackgroundOption() {
         return backgroundOption;
     }
 
-    public void setBackgroundOption(String backgroundOption) {
+    public void setBackgroundOption(GThumb.BACKGROUND_SHAPE backgroundOption) {
         this.backgroundOption = backgroundOption;
     }
 
@@ -124,7 +124,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
             if (useMonoColor) {
                 gThumb.setMonoColor(customMonoColor);
             } else {
-                gThumb.applyMultiColor(true);
+                gThumb.applyMultiColor();
             }
 
             gThumb.loadThumbForName(captainPlayer.getUrl(), captainPlayer.getFirstName(), captainPlayer.getLastName());

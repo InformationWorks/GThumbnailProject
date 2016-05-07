@@ -36,8 +36,14 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    public GListFragment getgListFragment() {
+    public GListFragment getListFragment() {
         return gListFragment;
+    }
+
+    public void scrollToList() {
+        if(viewPager!=null){
+            viewPager.setCurrentItem(0);
+        }
     }
 
     class PagerAdapter extends FragmentPagerAdapter {

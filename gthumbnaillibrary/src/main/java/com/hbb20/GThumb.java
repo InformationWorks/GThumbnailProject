@@ -40,6 +40,8 @@ public class GThumb extends RelativeLayout {
     boolean flagMonoColor;
     private int bgColorEntropy;
 
+    public enum BACKGROUND_SHAPE {ROUND,SQUARE}
+
     public GThumb(Context context) {
         super(context);
         this.context = context;
@@ -115,6 +117,9 @@ public class GThumb extends RelativeLayout {
         }
     }
 
+    /**
+     * refresh the background shape what ever is set. By default, it will be ROUND
+     */
     private void applyBackgroundShape() {
         if (bgShape == null) {
             bgShape = SHAPE_ROUND;
@@ -148,6 +153,10 @@ public class GThumb extends RelativeLayout {
         imageViewColorBg.setColorFilter(color, PorterDuff.Mode.MULTIPLY);
     }
 
+    /**
+     * This might be useful for textAutoFit feature.
+     * @return
+     */
     private int getFitSize() {
         int minDim = getWidth();
         if (minDim > getHeight()) {
@@ -157,14 +166,7 @@ public class GThumb extends RelativeLayout {
         return minDim == 0 ? 25 : minDim;
     }
 
-    /**
-     * This will update the size of text
-     *
-     * @param textSize size of text in pixel
-     */
-    public void setTextSize(int textSize) {
-        textViewInitials.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
-    }
+
 
     private int getContrastGrayColor(int color) {
         int red = Color.red(color);
@@ -185,23 +187,6 @@ public class GThumb extends RelativeLayout {
         Log.d(TAG, s);
     }
 
-    public void setBoldText(boolean boldText) {
-        this.flagBoldText = boldText;
-        if (isInEditMode()) {
-            if (boldText) {
-                textViewInitials.setTypeface(textViewInitials.getTypeface(), Typeface.BOLD);
-            } else {
-                textViewInitials.setTypeface(textViewInitials.getTypeface(), Typeface.NORMAL);
-            }
-        } else {
-            if (boldText) {
-                textViewInitials.setTypeface(null, Typeface.BOLD);
-            } else {
-                textViewInitials.setTypeface(null, Typeface.NORMAL);
-            }
-        }
-    }
-
     private void loadImage(String imageURL) {
         if (URLUtil.isValidUrl(imageURL)) {
             relativeForeground.setVisibility(View.VISIBLE);
@@ -215,13 +200,44 @@ public class GThumb extends RelativeLayout {
         }
     }
 
-    /*Public APIs*/
+    /**
+     * Entropy is responsible for background color.
+     * @param s
+     * @return
+     */
+    private int getEntropy(String s) {
+        return s.length();
+    }
+
+
+    /**
+     * Colors are set using entropy. Making this private will force user to add name. Names are bigger than initials so a good variation in entropy will be generated.
+     * @param imageURL
+     * @param initials
+     * @param colorEntropy
+     */
     private void loadThumbForInitials(String imageURL, String initials, int colorEntropy) {
         this.bgColorEntropy = colorEntropy;
         setAsInitialText(initials);
         setColors();
         loadImage(imageURL);
     }
+
+
+
+    /*
+    Public APIs*/
+
+    /**
+     *       AAAA       PPPPPPPPPP      IIIIIIIIIIIII
+     *      AA  AA      PP        PP          II
+     *     AA    AA     PP         PP         II
+     *    AA      AA    PP        PP          II
+     *   AAAAAAAAAAAA   PPPPPPPPPP            II
+     *  AA          AA  PP                    II
+     * AA            AA PP                    II
+     *AA              AAPP              IIIIIIIIIIIIII
+     */
 
     private void setColors() {
         if (flagMonoColor) {
@@ -234,6 +250,14 @@ public class GThumb extends RelativeLayout {
         }
     }
 
+    /**
+     * This function will set one character as thumb initials.
+     * @param imageURL URL of thumbnail which you intended to load as thumb
+     * @param firstName first name of entity. First character of this name will be set as Thumb initial.
+     *                  firstname:"Daizy"=> "D"
+     *                  firstname:"daina"=> "D"
+     *
+     */
     public void loadThumbForName(String imageURL, String firstName) {
         String initials = "";
         if (firstName != null && firstName.trim().length() >= 1) {
@@ -243,10 +267,15 @@ public class GThumb extends RelativeLayout {
         loadThumbForInitials(initials, imageURL, getEntropy(imageURL + firstName));
     }
 
-    private int getEntropy(String s) {
-        return s.length();
-    }
-
+    /**
+     * This will set two characters as thumb initials. First characters of both names will together make initials.
+     * @param imageURL URL of thumbnail which you intended to load as thumb
+     *                 if null then only initials will be set, it will not
+     * @param firstName first name of entity
+     * @param secondName second name of entity
+     *                   firstName:"Steve" , secondName:"jobs" => initials "SJ"
+     *                   firstName:"Stephen" , secondName:"amell" => initials "SA"
+     */
     public void loadThumbForName(String imageURL, String firstName, String secondName) {
         if (secondName == null || secondName.trim().length() == 0) {
             firstName = firstName.trim();
@@ -265,6 +294,10 @@ public class GThumb extends RelativeLayout {
         loadThumbForInitials(imageURL, initials, getEntropy(imageURL + firstName + secondName));
     }
 
+    /**
+     * There are few cases where developer want to set different event than entity tile.
+     * @param clickListener listener for thumb, null will remove click listener.
+     */
     @Override
     public void setOnClickListener(View.OnClickListener clickListener) {
         if (clickListener == null) {
@@ -278,28 +311,76 @@ public class GThumb extends RelativeLayout {
         }
     }
 
-    public void setBackgroundShape(String shapeOption) {
-        if (shapeOption.equals(SHAPE_ROUND) || shapeOption.equals(SHAPE_SQUARE)) {
-            bgShape = shapeOption;
-            applyBackgroundShape();
+    /**
+     * This will set background shape for thumbnail
+     * @param backgroundShape
+     */
+    public void setBackgroundShape(BACKGROUND_SHAPE backgroundShape) {
+        if(backgroundShape==BACKGROUND_SHAPE.SQUARE){
+            bgShape = SHAPE_SQUARE;
+        }else if(backgroundShape==BACKGROUND_SHAPE.ROUND) {
+            bgShape = SHAPE_ROUND;
         }
+            applyBackgroundShape();
     }
 
-    public void applyMultiColor(boolean applyMultiColor) {
-        if (applyMultiColor) {
-            flagMonoColor = false;
-        }
+    /**
+     * To apply multicolor, removes mono color from background and set color based on entropy.
+     */
+    public void applyMultiColor() {
+        flagMonoColor = false;
         setColors();
     }
 
+    /**
+     * This will set mono color for thumb background.
+     * Color of initials text will be set as gray scale contrast of given backgroundColor.
+     * to set custom text color as well, use setMonoColor(color,color); variant of the method
+     * @param monoBackgroundColor color for background
+     */
     public void setMonoColor(int monoBackgroundColor) {
         setMonoColor(monoBackgroundColor, getContrastGrayColor(monoBackgroundColor));
     }
 
+    /**
+     * This will enable mono color and set custom background color and custom initial text color
+     * @param monoBackgroundColor custom background color
+     * @param monoTextColor custom text color
+     */
     public void setMonoColor(int monoBackgroundColor, int monoTextColor) {
         flagMonoColor = true;
         this.monoBGColor = monoBackgroundColor;
         this.monoTextColor = monoTextColor;
         setColors();
+    }
+
+    /**
+     * To make initials bold or not.
+     * @param boldText will set text bold if true, else it will make font normal.
+     */
+    public void setBoldText(boolean boldText) {
+        this.flagBoldText = boldText;
+        if (isInEditMode()) {
+            if (boldText) {
+                textViewInitials.setTypeface(textViewInitials.getTypeface(), Typeface.BOLD);
+            } else {
+                textViewInitials.setTypeface(textViewInitials.getTypeface(), Typeface.NORMAL);
+            }
+        } else {
+            if (boldText) {
+                textViewInitials.setTypeface(null, Typeface.BOLD);
+            } else {
+                textViewInitials.setTypeface(null, Typeface.NORMAL);
+            }
+        }
+    }
+
+    /**
+     * This will update the size of text
+     *
+     * @param textSize size of text in pixel
+     */
+    public void setTextSize(int textSize) {
+        textViewInitials.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
 }

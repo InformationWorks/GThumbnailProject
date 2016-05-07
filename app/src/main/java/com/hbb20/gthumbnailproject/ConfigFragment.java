@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
@@ -32,7 +33,7 @@ public class ConfigFragment extends Fragment {
     List<GThumb> gThumbList;
     List<CaptainPlayer> captainPlayers;
     MainActivity mainActivity;
-    String selectedShape = GThumb.SHAPE_ROUND;
+    GThumb.BACKGROUND_SHAPE selectedShape = GThumb.BACKGROUND_SHAPE.ROUND;
     boolean needToSetClickListener = true;
     boolean useBold = false;
     @Bind(R.id.demo1)
@@ -73,6 +74,9 @@ public class ConfigFragment extends Fragment {
     SeekBar seekBarBlue;
     @Bind(R.id.overlay)
     View overlay;
+
+    @Bind(R.id.buttonList)
+    Button buttonList;
     int customMonoColor;
     boolean useMonoColor;
 
@@ -111,10 +115,10 @@ public class ConfigFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_round:
-                        selectedShape = GThumb.SHAPE_ROUND;
+                        selectedShape = GThumb.BACKGROUND_SHAPE.ROUND;
                         break;
                     case R.id.radio_square:
-                        selectedShape = GThumb.SHAPE_SQUARE;
+                        selectedShape = GThumb.BACKGROUND_SHAPE.SQUARE;
                         break;
                 }
                 applyChanges();
@@ -176,6 +180,15 @@ public class ConfigFragment extends Fragment {
         seekBarRed.setOnSeekBarChangeListener(seekBarChangeListener);
         seekBarGreen.setOnSeekBarChangeListener(seekBarChangeListener);
         seekBarBlue.setOnSeekBarChangeListener(seekBarChangeListener);
+
+        buttonList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mainActivity!=null){
+                    mainActivity.scrollToList();
+                }
+            }
+        });
     }
 
     private void enableSeekbars(boolean b) {
@@ -250,8 +263,8 @@ public class ConfigFragment extends Fragment {
         setChangesForAllDemo();
 
         //to changes to list
-        if (mainActivity != null && mainActivity.getgListFragment() != null) {
-            mainActivity.getgListFragment().updateAdapter(this);
+        if (mainActivity != null && mainActivity.getListFragment() != null) {
+            mainActivity.getListFragment().updateAdapter(this);
         }
     }
 
@@ -267,7 +280,7 @@ public class ConfigFragment extends Fragment {
             if (useMonoColor) {
                 gThumb.setMonoColor(customMonoColor);
             } else {
-                gThumb.applyMultiColor(true);
+                gThumb.applyMultiColor();
             }
         }
         loadAllThumbs();
@@ -281,7 +294,7 @@ public class ConfigFragment extends Fragment {
         return useBold;
     }
 
-    public String getSelectedShape() {
+    public GThumb.BACKGROUND_SHAPE getSelectedShape() {
         return selectedShape;
     }
 

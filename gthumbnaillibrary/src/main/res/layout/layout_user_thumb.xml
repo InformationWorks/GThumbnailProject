@@ -4,7 +4,6 @@
     android:layout_width="70dp"
     android:layout_height="70dp"
     android:background="?attr/selectableItemBackgroundBorderless"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
     android:orientation="vertical"
     android:padding="8dp">
     <RelativeLayout
