@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hbb20.GThumb;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,7 @@ public class GListFragment extends Fragment {
         userRecyclerAdapter = new UserRecyclerAdapter(getContext(), getDummyUserList());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(userRecyclerAdapter);
+        GThumb gt = new GThumb(getContext());
     }
 
     private List<CaptainPlayer> getDummyUserList() {

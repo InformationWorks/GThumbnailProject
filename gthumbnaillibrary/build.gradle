@@ -1,5 +1,29 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'GThumb'
+
+    publishedGroupId = 'com.hbb20'
+    libraryName = 'GThumb'
+    artifact = 'GThumb'
+
+    libraryDescription = 'Have you seen google\'s contacts app in which they show contact\'s circular thumb image at the left. Also shows initials of the contact if contact\'s picture is not set yet. This GThumb (G-Thumb) library let you replicate the same in your own app. Actually, GThumb can work with any entity like user, organization...anything..Now, your entity list screen won\'t look dry without images, anymore. You can put entity initials along with interesting colors at the background.'
+
+    siteUrl = 'https://github.com/InformationWorks/GThumbnailProject'
+    gitUrl = 'https://github.com/InformationWorks/GThumbnailProject.git'
+
+    libraryVersion = '1.0'
+
+    developerId = 'hbb20'
+    developerName = 'Harsh Bhakta'
+    developerEmail = 'harshbbhakta@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.3"
@@ -16,6 +40,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    tasks.withType(Javadoc).all { enabled = false }
 }
 
 dependencies {
@@ -25,3 +51,16 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jakewharton:butterknife:7.0.1'
 }
+
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+
+/**
+ * to install
+ * ./gradlew install
+ *
+ *
+ * While uploading,
+ * ./gradlew bintrayUpload
+ */
