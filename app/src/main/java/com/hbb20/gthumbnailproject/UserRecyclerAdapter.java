@@ -115,7 +115,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
             }
 
             //bold
-            gThumb.setBoldText(useBold);
+            gThumb.setUseBoldText(useBold);
 
             //shape
             gThumb.setBackgroundShape(backgroundOption);

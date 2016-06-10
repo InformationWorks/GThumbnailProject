@@ -24,9 +24,9 @@ import com.squareup.picasso.Picasso;
  */
 public class GThumb extends RelativeLayout {
 
-    public static String SHAPE_ROUND = "0";
-    public static String SHAPE_SQUARE = "1";
-    private static String TAG = "GThumb :";
+    private static String SHAPE_ROUND = "0";
+    private static String SHAPE_SQUARE = "1";
+    private static String TAG = "GThumb:";
     Context context;
     View rootView;
     RelativeLayout relativeForeground, relativeHolder;
@@ -40,19 +40,17 @@ public class GThumb extends RelativeLayout {
     boolean flagMonoColor;
     private int bgColorEntropy;
 
-    public enum BACKGROUND_SHAPE {ROUND,SQUARE}
-
     public GThumb(Context context) {
         super(context);
         this.context = context;
     }
-
 
     public GThumb(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
         init(attrs);
     }
+
 
     public GThumb(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -62,12 +60,12 @@ public class GThumb extends RelativeLayout {
 
     private void init(AttributeSet attrs) {
         log("Initialization");
-        rootView = LayoutInflater.from(context).inflate(R.layout.layout_user_thumb, this, true);
-        relativeForeground = (RelativeLayout) rootView.findViewById(R.id.relative_foreground);
-        relativeHolder = (RelativeLayout) rootView.findViewById(R.id.relative_holder);
-        textViewInitials = (TextView) rootView.findViewById(R.id.textView_initials);
-        imageViewRealImage = (ImageView) rootView.findViewById(R.id.imageView_real);
-        imageViewColorBg = (ImageView) rootView.findViewById(R.id.imageView_color_bg);
+        rootView = LayoutInflater.from(context).inflate(R.layout.layout_gt_user_thumb, this, true);
+        relativeForeground = (RelativeLayout) rootView.findViewById(R.id.relative_gt_foreground);
+        relativeHolder = (RelativeLayout) rootView.findViewById(R.id.relative_gt_holder);
+        textViewInitials = (TextView) rootView.findViewById(R.id.textView_gt_initials);
+        imageViewRealImage = (ImageView) rootView.findViewById(R.id.imageView_gt_real);
+        imageViewColorBg = (ImageView) rootView.findViewById(R.id.imageView_gt_color_bg);
         applyCustomAttributes(attrs);
     }
 
@@ -77,39 +75,35 @@ public class GThumb extends RelativeLayout {
         try {
 
             //custom text size
-            int textSize = a.getDimensionPixelSize(R.styleable.GThumb_textSize, Math.round(24 * (context.getResources().getDisplayMetrics().xdpi / DisplayMetrics.DENSITY_DEFAULT)));
+            int textSize = a.getDimensionPixelSize(R.styleable.GThumb_gtTextSize, Math.round(30 * (context.getResources().getDisplayMetrics().xdpi / DisplayMetrics.DENSITY_DEFAULT)));
             setTextSize(textSize);
 
             //colors
-            monoBGColor = a.getColor(R.styleable.GThumb_monoBGColor, -1);
-            monoTextColor = a.getColor(R.styleable.GThumb_monoTextColor, -1);
-            if (monoBGColor != -1 || monoTextColor != -1) {
+            monoBGColor = a.getColor(R.styleable.GThumb_gtMonoBGColor, -1);
+            monoTextColor = a.getColor(R.styleable.GThumb_gtMonoTextColor, -1);
+            if (monoBGColor != -1) {
                 flagMonoColor = true;
-            }
 
-            if (monoBGColor == -1) {
-                monoBGColor = context.getResources().getColor(R.color.google_deepPurple_500);
-            }
-
-            if (monoTextColor == -1) {
-                monoTextColor = getContrastGrayColor(monoBGColor);
+                if (monoTextColor == -1) {
+                    monoTextColor = getContrastGrayColor(monoBGColor);
+                }
             }
             setColors();
 
             //preview text
-            String preview = a.getString(R.styleable.GThumb_previewText);
+            String preview = a.getString(R.styleable.GThumb_gtPreviewText);
             if (preview == null || preview.length() == 0) {
-                preview = "hb";
+                preview = "GT";
             }
             setAsInitialText(preview);
 
             //set bg shape
-            bgShape = a.getString(R.styleable.GThumb_backgroundShape);
+            bgShape = a.getString(R.styleable.GThumb_gtBackgroundShape);
             applyBackgroundShape();
 
             //text style (bold/normal)
-            flagBoldText = a.getBoolean(R.styleable.GThumb_boldText, false);
-            setBoldText(flagBoldText);
+            flagBoldText = a.getBoolean(R.styleable.GThumb_gtUseBoldText, false);
+            setUseBoldText(flagBoldText);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -134,11 +128,11 @@ public class GThumb extends RelativeLayout {
 
     private void setAsInitialText(String initials) {
         if (initials == null || initials.trim().length() == 0) {
-            initials="";
-        }else {
+            initials = "";
+        } else {
             initials = initials.trim();
-            if(initials.length()>2){
-                initials=initials.substring(0,2);
+            if (initials.length() > 2) {
+                initials = initials.substring(0, 2);
             }
             initials = initials.trim().toUpperCase();
         }
@@ -155,6 +149,7 @@ public class GThumb extends RelativeLayout {
 
     /**
      * This might be useful for textAutoFit feature.
+     *
      * @return
      */
     private int getFitSize() {
@@ -165,8 +160,6 @@ public class GThumb extends RelativeLayout {
         textViewInitials.setText("" + minDim);
         return minDim == 0 ? 25 : minDim;
     }
-
-
 
     private int getContrastGrayColor(int color) {
         int red = Color.red(color);
@@ -202,16 +195,22 @@ public class GThumb extends RelativeLayout {
 
     /**
      * Entropy is responsible for background color.
+     *
      * @param s
      * @return
      */
     private int getEntropy(String s) {
-        return s.length();
+        int entropy = 0;
+        for (int i = 0; i < s.length(); i++) {
+            Character c = s.charAt(i);
+            entropy = entropy + c;
+        }
+        return entropy;
     }
-
 
     /**
      * Colors are set using entropy. Making this private will force user to add name. Names are bigger than initials so a good variation in entropy will be generated.
+     *
      * @param imageURL
      * @param initials
      * @param colorEntropy
@@ -223,7 +222,33 @@ public class GThumb extends RelativeLayout {
         loadImage(imageURL);
     }
 
+    private void setColors() {
+        if (flagMonoColor) {
+            setThumbBackground(monoBGColor);
+            setTextColor(monoTextColor);
+        } else {
+            GThumbSwatch gThumbSwatch = GThumbSwatch.getGThumbSwatchForEntropy(bgColorEntropy);
+            setThumbBackground(gThumbSwatch.colorBG);
+            setTextColor(gThumbSwatch.colorText);
+        }
+    }
 
+    /**
+     * This function will set one character as thumb initials.
+     *
+     * @param imageURL  URL of thumbnail which you intended to load as thumb
+     * @param firstName first name of entity. First character of this name will be set as Thumb initial.
+     *                  firstname:"Daizy"--output "D"
+     *                  firstname:"daina"--output "D"
+     */
+    public void loadThumbForName(String imageURL, String firstName) {
+        String initials = "";
+        if (firstName != null && firstName.trim().length() >= 1) {
+            firstName = firstName.trim();
+            initials = firstName.charAt(0) + "";
+        }
+        loadThumbForInitials(initials, imageURL, getEntropy(imageURL + firstName));
+    }
 
     /*
     Public APIs*/
@@ -239,42 +264,15 @@ public class GThumb extends RelativeLayout {
      *AA              AAPP              IIIIIIIIIIIIII
      */
 
-    private void setColors() {
-        if (flagMonoColor) {
-            setThumbBackground(monoBGColor);
-            setTextColor(monoTextColor);
-        } else {
-            GThumbSwatch gThumbSwatch = GThumbSwatch.getGThumbSwatchForEntropy(bgColorEntropy);
-            setThumbBackground(gThumbSwatch.colorBG);
-            setTextColor(gThumbSwatch.colorText);
-        }
-    }
-
-    /**
-     * This function will set one character as thumb initials.
-     * @param imageURL URL of thumbnail which you intended to load as thumb
-     * @param firstName first name of entity. First character of this name will be set as Thumb initial.
-     *                  firstname:"Daizy"=> "D"
-     *                  firstname:"daina"=> "D"
-     *
-     */
-    public void loadThumbForName(String imageURL, String firstName) {
-        String initials = "";
-        if (firstName != null && firstName.trim().length() >= 1) {
-            firstName = firstName.trim();
-            initials = firstName.charAt(0) + "";
-        }
-        loadThumbForInitials(initials, imageURL, getEntropy(imageURL + firstName));
-    }
-
     /**
      * This will set two characters as thumb initials. First characters of both names will together make initials.
-     * @param imageURL URL of thumbnail which you intended to load as thumb
-     *                 if null then only initials will be set, it will not
-     * @param firstName first name of entity
+     *
+     * @param imageURL   URL of thumbnail which you intended to load as thumb
+     *                   if null then only initials will be set, it will not
+     * @param firstName  first name of entity
      * @param secondName second name of entity
-     *                   firstName:"Steve" , secondName:"jobs" => initials "SJ"
-     *                   firstName:"Stephen" , secondName:"amell" => initials "SA"
+     *                   firstName:"Steve" , secondName:"jobs" --output initials "SJ"
+     *                   firstName:"Stephen" , secondName:"amell" --output initials "SA"
      */
     public void loadThumbForName(String imageURL, String firstName, String secondName) {
         if (secondName == null || secondName.trim().length() == 0) {
@@ -296,6 +294,7 @@ public class GThumb extends RelativeLayout {
 
     /**
      * There are few cases where developer want to set different event than entity tile.
+     *
      * @param clickListener listener for thumb, null will remove click listener.
      */
     @Override
@@ -313,15 +312,17 @@ public class GThumb extends RelativeLayout {
 
     /**
      * This will set background shape for thumbnail
-     * @param backgroundShape
+     *
+     * @param backgroundShape GThumb.BACKGROUND_SHAPE.SQUARE to set square background
+     *                        GThumb.BACKGROUND_SHAPE.ROUND to set round background
      */
     public void setBackgroundShape(BACKGROUND_SHAPE backgroundShape) {
-        if(backgroundShape==BACKGROUND_SHAPE.SQUARE){
+        if (backgroundShape == BACKGROUND_SHAPE.SQUARE) {
             bgShape = SHAPE_SQUARE;
-        }else if(backgroundShape==BACKGROUND_SHAPE.ROUND) {
+        } else if (backgroundShape == BACKGROUND_SHAPE.ROUND) {
             bgShape = SHAPE_ROUND;
         }
-            applyBackgroundShape();
+        applyBackgroundShape();
     }
 
     /**
@@ -336,6 +337,7 @@ public class GThumb extends RelativeLayout {
      * This will set mono color for thumb background.
      * Color of initials text will be set as gray scale contrast of given backgroundColor.
      * to set custom text color as well, use setMonoColor(color,color); variant of the method
+     *
      * @param monoBackgroundColor color for background
      */
     public void setMonoColor(int monoBackgroundColor) {
@@ -344,8 +346,9 @@ public class GThumb extends RelativeLayout {
 
     /**
      * This will enable mono color and set custom background color and custom initial text color
+     *
      * @param monoBackgroundColor custom background color
-     * @param monoTextColor custom text color
+     * @param monoTextColor       custom text color
      */
     public void setMonoColor(int monoBackgroundColor, int monoTextColor) {
         flagMonoColor = true;
@@ -356,18 +359,19 @@ public class GThumb extends RelativeLayout {
 
     /**
      * To make initials bold or not.
-     * @param boldText will set text bold if true, else it will make font normal.
+     *
+     * @param useBoldText will set text bold if true, else it will make font normal.
      */
-    public void setBoldText(boolean boldText) {
-        this.flagBoldText = boldText;
+    public void setUseBoldText(boolean useBoldText) {
+        this.flagBoldText = useBoldText;
         if (isInEditMode()) {
-            if (boldText) {
+            if (useBoldText) {
                 textViewInitials.setTypeface(textViewInitials.getTypeface(), Typeface.BOLD);
             } else {
                 textViewInitials.setTypeface(textViewInitials.getTypeface(), Typeface.NORMAL);
             }
         } else {
-            if (boldText) {
+            if (useBoldText) {
                 textViewInitials.setTypeface(null, Typeface.BOLD);
             } else {
                 textViewInitials.setTypeface(null, Typeface.NORMAL);
@@ -383,4 +387,6 @@ public class GThumb extends RelativeLayout {
     public void setTextSize(int textSize) {
         textViewInitials.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
     }
+
+    public enum BACKGROUND_SHAPE {ROUND, SQUARE}
 }

@@ -1,1 +1,1 @@
-include ':app', ':gthumbnaillibrary'
+include ':app', ':gthumb'

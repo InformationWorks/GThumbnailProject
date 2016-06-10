@@ -286,7 +286,7 @@
                     android:id="@+id/buttonList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Check changes in list"/>
+                    android:text="Tap to check changes in list" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

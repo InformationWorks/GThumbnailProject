@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relative_holder"
-    android:layout_width="70dp"
-    android:layout_height="70dp"
+    android:id="@+id/relative_gt_holder"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="?attr/selectableItemBackgroundBorderless"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="4dp">
     <RelativeLayout
-        android:id="@+id/relative_background"
+        android:id="@+id/relative_gt_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
         <ImageView
-            android:id="@+id/imageView_color_bg"
+            android:id="@+id/imageView_gt_color_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:src="@drawable/oval_white"
             android:tint="@color/google_deepPurple_500" />
         <TextView
-            android:id="@+id/textView_initials"
+            android:id="@+id/textView_gt_initials"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:text="HB"
+            android:text="GT"
             android:textColor="@color/g_white"
             android:textSize="22sp" />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/relative_foreground"
+        android:id="@+id/relative_gt_foreground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
-            android:id="@+id/imageView_real"
+            android:id="@+id/imageView_gt_real"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

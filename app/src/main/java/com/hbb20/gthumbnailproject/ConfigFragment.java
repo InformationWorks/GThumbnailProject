@@ -212,10 +212,10 @@ public class ConfigFragment extends Fragment {
 
         //set captainPlayer
         captainPlayers = new ArrayList<>();
-        captainPlayers.add(new CaptainPlayer("Eoin", "Morgan", "England", ""));
         captainPlayers.add(new CaptainPlayer("Elton", "Chigumbura", "Zimbabwe", ""));
         captainPlayers.add(new CaptainPlayer("AB de", "Villiers", "South Africa", "https://s.yimg.com/qx/cricket/fufp/images/3675_large-20-6-2012-9549fcb8e83238bb4736dafd21cf2569.jpg"));
         captainPlayers.add(new CaptainPlayer("Steven", "Smith", "Australia", ""));
+        captainPlayers.add(new CaptainPlayer("Mohammad", "Tauqir", "UAE", ""));
 
         loadAllThumbs();
         seekBarRed.setProgress(255);
@@ -274,7 +274,7 @@ public class ConfigFragment extends Fragment {
 
     private void setChangesForAllDemo() {
         for (GThumb gThumb : gThumbList) {
-            gThumb.setBoldText(useBold());
+            gThumb.setUseBoldText(useBold());
             gThumb.setBackgroundShape(getSelectedShape());
             gThumb.setOnClickListener(null);
             if (useMonoColor) {

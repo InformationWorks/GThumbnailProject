@@ -6,14 +6,14 @@ ext {
 
     publishedGroupId = 'com.hbb20'
     libraryName = 'GThumb'
-    artifact = 'GThumb'
+    artifact = 'gthumb'
 
     libraryDescription = 'Have you seen google\'s contacts app in which they show contact\'s circular thumb image at the left. Also shows initials of the contact if contact\'s picture is not set yet. This GThumb (G-Thumb) library let you replicate the same in your own app. Actually, GThumb can work with any entity like user, organization...anything..Now, your entity list screen won\'t look dry without images, anymore. You can put entity initials along with interesting colors at the background.'
 
     siteUrl = 'https://github.com/InformationWorks/GThumbnailProject'
     gitUrl = 'https://github.com/InformationWorks/GThumbnailProject.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.2'
 
     developerId = 'hbb20'
     developerName = 'Harsh Bhakta'
@@ -41,7 +41,7 @@ android {
         }
     }
 
-    tasks.withType(Javadoc).all { enabled = false }
+    //tasks.withType(Javadoc).all { enabled = false }
 }
 
 dependencies {
@@ -49,7 +49,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.jakewharton:butterknife:7.0.1'
+
 }
 
 

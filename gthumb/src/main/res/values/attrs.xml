@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GThumb">
+        <attr name="gtTextSize" format="dimension" />
+        <attr name="gtPreviewText" format="string" />
+        <attr name="gtMonoBGColor" format="color" />
+        <attr name="gtMonoTextColor" format="color" />
+        <attr name="gtBackgroundShape" format="enum">
+            <enum name="round" value="0" />
+            <enum name="square" value="1" />
+        </attr>
+        <attr name="gtUseBoldText" format="boolean" />
+    </declare-styleable>
+</resources>

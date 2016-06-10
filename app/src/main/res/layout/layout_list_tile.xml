@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ededed"
@@ -16,10 +15,9 @@
             android:id="@+id/gThumb"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginBottom="4dp"
             android:layout_marginLeft="25dp"
-            app:backgroundShape="round"
-            app:previewText="HB"
-            app:textSize="22sp" />
+            android:layout_marginTop="4dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
