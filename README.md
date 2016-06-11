@@ -23,7 +23,7 @@ Do you want to enrich the look of user list or you wish profile screen looks tha
   
   ````groovy
   dependencies {
-    compile 'com.hbb20:gthumb:1.2'
+    compile 'com.hbb20:gthumb:1.3'
   }
   ````
   
