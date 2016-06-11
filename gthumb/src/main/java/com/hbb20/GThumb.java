@@ -236,22 +236,7 @@ public class GThumb extends RelativeLayout {
         }
     }
 
-    /**
-     * This function will set one character as thumb initials.
-     *
-     * @param imageURL  URL of thumbnail which you intended to load as thumb
-     * @param firstName first name of entity. First character of this name will be set as Thumb initial.
-     *                  firstname:"Daizy"--output "D"
-     *                  firstname:"daina"--output "D"
-     */
-    public void loadThumbForName(String imageURL, String firstName) {
-        String initials = "";
-        if (firstName != null && firstName.trim().length() >= 1) {
-            firstName = firstName.trim();
-            initials = firstName.charAt(0) + "";
-        }
-        loadThumbForInitials(initials, imageURL, getEntropy(imageURL + firstName));
-    }
+
 
     /*
     Public APIs*/
@@ -279,11 +264,14 @@ public class GThumb extends RelativeLayout {
      */
     public void loadThumbForName(String imageURL, String firstName, String secondName) {
         if (secondName == null || secondName.trim().length() == 0) {
-            firstName = firstName.trim();
-            loadThumbForName(imageURL, firstName);
+            if (firstName != null && firstName.trim().length() > 0) {
+                firstName = firstName.trim();
+                loadThumbForName(imageURL, firstName);
+            } else {
+                loadThumbForName(imageURL, "");
+            }
             return;
         }
-
 
         if (firstName == null || firstName.trim().length() == 0) {
             secondName = secondName.trim();
@@ -297,6 +285,22 @@ public class GThumb extends RelativeLayout {
         loadThumbForInitials(imageURL, initials, getEntropy(imageURL + firstName + secondName));
     }
 
+    /**
+     * This function will set one character as thumb initials.
+     *
+     * @param imageURL  URL of thumbnail which you intended to load as thumb
+     * @param firstName first name of entity. First character of this name will be set as Thumb initial.
+     *                  firstname:"Daizy"--output "D"
+     *                  firstname:"daina"--output "D"
+     */
+    public void loadThumbForName(String imageURL, String firstName) {
+        String initials = "";
+        if (firstName != null && firstName.trim().length() >= 1) {
+            firstName = firstName.trim();
+            initials = firstName.charAt(0) + "";
+        }
+        loadThumbForInitials(imageURL, initials, getEntropy(imageURL + firstName));
+    }
     /**
      * There are few cases where developer want to set different event than entity tile.
      *
