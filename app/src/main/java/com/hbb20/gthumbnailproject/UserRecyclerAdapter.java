@@ -107,7 +107,7 @@ public class UserRecyclerAdapter extends RecyclerView.Adapter<UserRecyclerAdapte
                 gThumb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(context, "Clicked on " + captainPlayer.getFirstName() + "\nClick listener is optional", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Clicked on " + captainPlayer.getFirstName(), Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {

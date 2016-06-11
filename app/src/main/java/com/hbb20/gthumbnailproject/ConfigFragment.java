@@ -223,8 +223,6 @@ public class ConfigFragment extends Fragment {
         seekBarBlue.setProgress(34);
         //seek bar disabled
         setSampleColorFromSeekBar();
-
-
         enableSeekbars(false);
     }
 
@@ -249,7 +247,7 @@ public class ConfigFragment extends Fragment {
                 gThumb.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "Clicked on " + captainPlayer.getFirstName() + "\nClick listener is optional", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Clicked on " + captainPlayer.getFirstName(), Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {

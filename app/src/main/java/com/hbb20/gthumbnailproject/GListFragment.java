@@ -55,7 +55,7 @@ public class GListFragment extends Fragment {
     private List<CaptainPlayer> getDummyUserList() {
         List<CaptainPlayer> captainPlayerList = new ArrayList<>();
 
-        captainPlayerList.add(new CaptainPlayer("Asghar", "Stanikzai", "Afhanistan", ""));
+        captainPlayerList.add(new CaptainPlayer("Asghar", "Stanikzai", "Afghanistan", ""));
         captainPlayerList.add(new CaptainPlayer("Steven", "Smith", "Australia", ""));
         captainPlayerList.add(new CaptainPlayer("Eoin", "Morgan", "England", ""));
         captainPlayerList.add(new CaptainPlayer("Mahendrasinh", "Dhoni", "India", "https://s.yimg.com/qx/cricket/fufp/images/3676_large-16-1-2011-df12c86ee47d28cdc1e6776c202f321c.jpg"));

@@ -105,6 +105,9 @@ public class GThumb extends RelativeLayout {
             flagBoldText = a.getBoolean(R.styleable.GThumb_gtUseBoldText, false);
             setUseBoldText(flagBoldText);
 
+            //null click listener
+            setOnClickListener(null);
+
         } catch (Exception ex) {
             ex.printStackTrace();
             log("Error in applying custom attributes");
@@ -172,7 +175,7 @@ public class GThumb extends RelativeLayout {
         } else {
             gray = 192 + (avg / 2);
         }
-        textViewInitials.setText("" + gray);
+        //textViewInitials.setText("" + gray);
         return Color.rgb(gray, gray, gray);
     }
 
@@ -288,6 +291,8 @@ public class GThumb extends RelativeLayout {
             return;
         }
 
+        firstName = firstName.trim();
+        secondName = secondName.trim();
         String initials = firstName.substring(0, 1) + secondName.substring(0, 1);
         loadThumbForInitials(imageURL, initials, getEntropy(imageURL + firstName + secondName));
     }
