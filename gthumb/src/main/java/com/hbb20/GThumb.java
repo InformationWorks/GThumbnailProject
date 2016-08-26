@@ -2,9 +2,11 @@ package com.hbb20;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -17,7 +19,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hbb20.gthumbnaillibrary.R;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 /**
  * Created by hbb20 on 18/4/16.
@@ -29,7 +34,7 @@ public class GThumb extends RelativeLayout {
     private static String TAG = "GThumb:";
     Context context;
     View rootView;
-    RelativeLayout relativeForeground, relativeHolder;
+    RelativeLayout relativeForeground, relativeHolder, relativeBackgroundHolder;
     TextView textViewInitials;
     ImageView imageViewRealImage, imageViewColorBg;
     String bgShape, textStyle = null;
@@ -38,6 +43,7 @@ public class GThumb extends RelativeLayout {
     int maxLength;
     int monoBGColor, monoTextColor;
     boolean flagMonoColor;
+    boolean hideUntilImageLoaded;
     private int bgColorEntropy;
 
     public GThumb(Context context) {
@@ -66,6 +72,7 @@ public class GThumb extends RelativeLayout {
         textViewInitials = (TextView) rootView.findViewById(R.id.textView_gt_initials);
         imageViewRealImage = (ImageView) rootView.findViewById(R.id.imageView_gt_real);
         imageViewColorBg = (ImageView) rootView.findViewById(R.id.imageView_gt_color_bg);
+        relativeBackgroundHolder=(RelativeLayout)rootView.findViewById(R.id.relative_gt_background);
         applyCustomAttributes(attrs);
     }
 
@@ -96,6 +103,9 @@ public class GThumb extends RelativeLayout {
                 preview = "GT";
             }
             setAsInitialText(preview);
+
+            //hide until image loaded
+            hideUntilImageLoaded=a.getBoolean(R.styleable.GThumb_gtHideUntilImageLoaded, false);
 
             //set bg shape
             bgShape = a.getString(R.styleable.GThumb_gtBackgroundShape);
@@ -185,14 +195,36 @@ public class GThumb extends RelativeLayout {
 
     private void loadImage(String imageURL) {
         if (URLUtil.isValidUrl(imageURL)) {
-            relativeForeground.setVisibility(View.VISIBLE);
+
+
+            if(hideUntilImageLoaded){
+                relativeForeground.setVisibility(INVISIBLE);
+                relativeBackgroundHolder.setVisibility(INVISIBLE);
+            }else {
+                relativeBackgroundHolder.setVisibility(VISIBLE);
+                relativeForeground.setVisibility(VISIBLE);
+            }
+            Callback callback=new Callback() {
+                @Override
+                public void onSuccess() {
+                    relativeForeground.setVisibility(VISIBLE);
+                    relativeBackgroundHolder.setVisibility(VISIBLE);
+                }
+
+                @Override
+                public void onError() {
+                    relativeForeground.setVisibility(INVISIBLE);
+                    relativeBackgroundHolder.setVisibility(VISIBLE);
+                }
+            };
             if (bgShape.equals(SHAPE_SQUARE)) {
-                Picasso.with(context).load(imageURL).into(imageViewRealImage);
+                Picasso.with(context).load(imageURL).into(imageViewRealImage,callback);
             } else {
-                Picasso.with(context).load(imageURL).transform(new CircleTransform()).into(imageViewRealImage);
+                Picasso.with(context).load(imageURL).transform(new CircleTransform()).into(imageViewRealImage,callback);
             }
         } else { //if URL is not valid
             relativeForeground.setVisibility(GONE);
+            relativeBackgroundHolder.setVisibility(VISIBLE);
         }
     }
 
@@ -309,9 +341,9 @@ public class GThumb extends RelativeLayout {
     @Override
     public void setOnClickListener(View.OnClickListener clickListener) {
         if (clickListener == null) {
+            relativeHolder.setOnClickListener(null);
             relativeHolder.setEnabled(false);
             relativeHolder.setClickable(false);
-            relativeHolder.setOnClickListener(null);
         } else {
             relativeHolder.setClickable(true);
             relativeHolder.setEnabled(true);
@@ -395,6 +427,19 @@ public class GThumb extends RelativeLayout {
      */
     public void setTextSize(int textSize) {
         textViewInitials.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+    }
+
+    public boolean isHideUntilImageLoaded() {
+        return hideUntilImageLoaded;
+    }
+
+    /**
+     * If this flag will be true, gthumb will be hidden until image is loaded.
+     * if the image load fails or image url is not valid, it will show initials.
+     * @param hideUntilImageLoaded
+     */
+    public void setHideUntilImageLoaded(boolean hideUntilImageLoaded) {
+        this.hideUntilImageLoaded = hideUntilImageLoaded;
     }
 
     public enum BACKGROUND_SHAPE {ROUND, SQUARE}

@@ -10,5 +10,6 @@
             <enum name="square" value="1" />
         </attr>
         <attr name="gtUseBoldText" format="boolean" />
+        <attr name="gtHideUntilImageLoaded" format="boolean"/>
     </declare-styleable>
 </resources>
