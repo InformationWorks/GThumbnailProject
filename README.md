@@ -1,5 +1,5 @@
 # GThumb Android Library
- <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/app/src/main/res/drawable/cover.png" width=400>
+ <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/readme_res/cover.png" width=400>
  
  
 ##Introduction
@@ -9,7 +9,7 @@ Do you want to enrich the look of user list or you wish profile screen looks tha
 ## UI transformation
   GThumb library allows you to replicate the thumb appearance of Android (pure)’s “Contacts” or “GMail” application. Here is a sample how a list UI look without library and with library use.
   
-  <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/app/src/main/res/drawable/compare.png" width=400>
+  <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/readme_res/compare.png" width=400>
 
 ## Demo
   It is always better to play around features rather than looking at screenshots. Here is a demo app of this library which demonstrates features of this library.
@@ -23,7 +23,7 @@ Do you want to enrich the look of user list or you wish profile screen looks tha
   
   ````groovy
   dependencies {
-    compile 'com.hbb20:gthumb:1.2'
+    compile 'com.hbb20:gthumb:1.3'
   }
   ````
   
@@ -69,14 +69,14 @@ Do you want to enrich the look of user list or you wish profile screen looks tha
 #### Colors
 
   - <b>Multicolor</b>
-    - <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/app/src/main/res/drawable/normal.png" width=400>
+    - <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/readme_res/normal.png" width=400>
     - In this, thumb background color and text color will be selected from wide array of colors. Library will handle the array internally.
     - This option is enabled by default.
     - Color from array will be picked based on lenght of params passed in ````loadThumbForName();```` method.
     - In case when you had enabled mono color mode and want to switch back to multi color mode use ````gthumb.applyMultiColor();````
   
   - <b>Monocolor</b>
-    - <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/app/src/main/res/drawable/mono_color.png" width=400>
+    - <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/readme_res/mono_color.png" width=400>
     - When you want to set single custom color to thumbnail you need to set mono color.
     - using XML
       - Add ````xml app:gtMonoBGColor ```` to layout
@@ -102,11 +102,11 @@ Do you want to enrich the look of user list or you wish profile screen looks tha
   
   - <b>Round</b>
     
-    <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/app/src/main/res/drawable/normal.png" width=400>
+    <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/readme_res/normal.png" width=400>
     
   - <b>Square</b>
     
-    <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/app/src/main/res/drawable/square.png" width=400>
+    <img src="https://raw.githubusercontent.com/InformationWorks/GThumbnailProject/master/readme_res/square.png" width=400>
   
   - Using XML
     - To set shape from xml layout, add ````xml app:gtBackgroundShape ````
